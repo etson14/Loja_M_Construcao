@@ -5,10 +5,18 @@
  */
 package loja_m_construcao.domain;
 
-/**
- *
- * @author Edson Tavares
- */
+import java.time.LocalDate;
+
+
 public class Material {
+    
+    public int idMaterial;
+    public String descricao;
+    public String marca;
+    public String modelo;
+    public String cor;
+    public LocalDate dataFabricacao;
+    public String unidadeMedida;
+    public float preco;
     
 }

@@ -11,4 +11,11 @@ package loja_m_construcao.domain;
  */
 public class Pedido {
     
+    public int idPedido;
+    public int quantidadade;
+    public float valor;
+    public Material material;
+    public Venda venda;
+    
+    
 }
