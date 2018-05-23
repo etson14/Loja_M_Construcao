@@ -5,13 +5,15 @@
  */
 package loja_m_construcao;
 
+import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import loja_m_construcao.domain.Cliente;
 public class Loja_M_Construcao {
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int cod,opc,pp;
         
         Scanner ler =new Scanner(System.in);
@@ -34,7 +36,7 @@ public class Loja_M_Construcao {
     System.out.print("Palavra-Passe:");
     pp=ler.nextInt();
     
-    if(cod!=1234 || pp!=1234){
+    if(cod!=1 || pp!=1){
         JOptionPane.showMessageDialog(frame,"Codigo ou Palavra-Passe Incorreto");
     }
     else 
@@ -75,8 +77,9 @@ public class Loja_M_Construcao {
     switch(opc){
         
         case 1:{
-            
-        break;}
+            Cliente c = new Cliente();
+            c.menu();         
+        }
         
         case 2:{
             

@@ -30,7 +30,7 @@ public class Cliente extends Pessoa {
     
     
     
-    public void meno() throws IOException{        
+    public void menu() throws IOException{        
         System.out.println("\t Menu Cliente");
         System.out.println("1 -> Listar Cliente");
         System.out.println("2 -> Adicionar Cliente");
@@ -38,8 +38,12 @@ public class Cliente extends Pessoa {
         System.out.println("4 -> Eliminar Cliente");
         System.out.println("0 -> sair");
         System.out.println("Escolha uma opção");
+        op  = ler.nextInt();
         
         switch(op){
+            case 0:{
+                break;
+            }
             case 1:{
                 break;
             }
@@ -60,78 +64,82 @@ public class Cliente extends Pessoa {
     public void adicionar() throws IOException{
         FileWriter clienteFileWriter = new FileWriter(clienteFile,true);
         BufferedWriter clienteBufferedWriter = new BufferedWriter(clienteFileWriter);
+        Cliente cliente = new Cliente();
+        Endereco endereco = new Endereco();
         
-         System.out.println("\t Adicionar Cliente");
+        ler.nextLine();
+        System.out.println("\t Adicionar Cliente");
          
          System.out.println("Entre com o nome completo");
-         this.nome = ler.nextLine();
+         cliente.nome = ler.nextLine();
          
          System.out.println("Entre com a data nascimento");
-         System.out.println("Entre com dia");
+         System.out.println("Dia");
          this.dia = ler.nextInt();
          
-         System.out.println("Entre com mes");
+         System.out.println("Mes");
          this.mes = ler.nextInt();
          
-         System.out.println("Entre com ano");
+         System.out.println("Ano");
          this.ano = ler.nextInt();
-         this.dataNascimento = LocalDate.of(ano, mes ,dia);
+         cliente.dataNascimento = LocalDate.of(ano, mes ,dia);
          
          ler.nextLine();
          System.out.println("BI");
-         this.BI = ler.nextLine();
+         cliente.BI = ler.nextLine();
          
          System.out.println("Entre com Naturalidade");
-         this.Naturalidade = ler.nextLine();
+         cliente.Naturalidade = ler.nextLine();
          
          System.out.println("Entre com Email");
-         this.Email = ler.nextLine();
+         cliente.Email = ler.nextLine();
          
          System.out.println("Entre com Telefone");
-         this.Telefone = ler.nextLine();
+         cliente.Telefone = ler.nextLine();
          
          System.out.println("Entre com Nome Pai");
-         this.nomePai = ler.nextLine();
+         cliente.nomePai = ler.nextLine();
          
          System.out.println("Entre com Nome Mae");
-         this.nomeMae = ler.nextLine();
+         cliente.nomeMae = ler.nextLine();
          
          System.out.println("Entre com Rua");
-         this.endereco.rua = ler.nextLine();
+         endereco.rua = ler.nextLine();
          
          System.out.println("Entre com Numero");
-         this.endereco.numero = ler.nextLine();
+         endereco.numero = ler.nextLine();
          
          System.out.println("Entre com Bairro");
-         this.endereco.bairro = ler.nextLine();
+         endereco.bairro = ler.nextLine();
          
          System.out.println("Entre com Cidade");
-         this.endereco.cidade = ler.nextLine();
+         endereco.cidade = ler.nextLine();
          
          System.out.println("Entre com Caixa Postal");
-         this.endereco.caixaPostal = ler.nextLine();
+         endereco.caixaPostal = ler.nextLine();
          
          System.out.println("Entre com Ilha");
-         this.endereco.ilha = ler.nextLine();
+         endereco.ilha = ler.nextLine();
+         cliente.endereco =  endereco;
          
          System.out.println("Entre com Total Rendimento");
-         this.totalRendimento = ler.nextFloat();
+         cliente.totalRendimento = ler.nextFloat();
          
-         clienteBufferedWriter.write(this.nome + ";");
-         clienteBufferedWriter.write(this.dataNascimento + ";");
-         clienteBufferedWriter.write(this.BI + ";");
-         clienteBufferedWriter.write(this.Naturalidade + ";");         
-         clienteBufferedWriter.write(this.Email + ";");         
-         clienteBufferedWriter.write(this.Telefone + ";");
-         clienteBufferedWriter.write(this.nomePai + ";");
-         clienteBufferedWriter.write(this.nomeMae + ";");
-         clienteBufferedWriter.write(this.endereco.rua + ";");
-         clienteBufferedWriter.write(this.endereco.numero + ";");
-         clienteBufferedWriter.write(this.endereco.bairro + ";");
-         clienteBufferedWriter.write(this.endereco.cidade+ ";");
-         clienteBufferedWriter.write(this.endereco.caixaPostal + ";");
-         clienteBufferedWriter.write(this.endereco.ilha + ";");
-         clienteBufferedWriter.write(this.totalRendimento + "\n");
+         clienteBufferedWriter.write(cliente.nome + ";");
+         clienteBufferedWriter.write(cliente.dataNascimento + ";");
+         clienteBufferedWriter.write(cliente.BI + ";");
+         clienteBufferedWriter.write(cliente.Naturalidade + ";");         
+         clienteBufferedWriter.write(cliente.Email + ";");         
+         clienteBufferedWriter.write(cliente.Telefone + ";");
+         clienteBufferedWriter.write(cliente.nomePai + ";");
+         clienteBufferedWriter.write(cliente.nomeMae + ";");
+         clienteBufferedWriter.write(cliente.endereco.rua + ";");
+         clienteBufferedWriter.write(cliente.endereco.numero + ";");
+         clienteBufferedWriter.write(cliente.endereco.bairro + ";");
+         clienteBufferedWriter.write(cliente.endereco.cidade+ ";");
+         clienteBufferedWriter.write(cliente.endereco.caixaPostal + ";");
+         clienteBufferedWriter.write(cliente.endereco.ilha + ";");
+         clienteBufferedWriter.write(cliente.totalRendimento + "\n");
          
           clienteBufferedWriter.close();
     }
