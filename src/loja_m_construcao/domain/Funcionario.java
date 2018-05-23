@@ -5,7 +5,10 @@
  */
 package loja_m_construcao.domain;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -28,7 +31,7 @@ public class Funcionario extends Pessoa {
     Scanner ler = new Scanner(System.in);
 
 
-    public void menu(){
+    public void menu() throws IOException{
         System.out.println("\t Menu Funcionarios");
         System.out.println("1 -> Listar Funcionarios");
         System.out.println("2 -> Adicionar Funcionarios");
@@ -36,7 +39,8 @@ public class Funcionario extends Pessoa {
         System.out.println("4 -> Eliminar Funcionarios");
         System.out.println("0 -> Sair");
         System.out.println("Escolha uma opção: ");
-
+        op = ler.nextInt();
+        
         switch(op){
             case 1: {
                 listar();
@@ -53,12 +57,16 @@ public class Funcionario extends Pessoa {
 
     }
 
-    public void adicionar(){
+    public void adicionar() throws IOException{
+        FileWriter funFileWriter = new FileWriter(funcionarioFile, true);
+        BufferedWriter funBuffWriter = new BufferedWriter(funFileWriter);
+        
         System.out.println("\t Adicionar Funcionario");
         
         System.out.println("Entre com o codigo");
         this.idFuncionario = ler.nextInt();
         
+        ler.nextLine();
         System.out.println("Entre com o nome completo");
         this.nome = ler.nextLine();
         
@@ -76,6 +84,10 @@ public class Funcionario extends Pessoa {
         ler.nextLine();
         System.out.println("Entre com o NIF");
         this.NIF = ler.nextLine();
+//        if(!NIF.matches("[0-9]")){
+//            System.out.println("Entre com o NIF novamente");
+//            this.NIF = ler.nextLine();
+//        }
         
         System.out.println("Entre com o BI");
         this.BI = ler.nextLine();
@@ -95,25 +107,37 @@ public class Funcionario extends Pessoa {
         System.out.println("Entre com o nome da mãe");
         this.nomeMae = ler.nextLine();
         
-        System.out.println("Entre com a rua: ");
-        this.endereco.rua = ler.nextLine();        
+//        System.out.println("Entre com a rua: ");
+//        this.endereco.rua = ler.nextLine();        
+//        
+//        System.out.println("Entre com o numero: ");
+//        this.endereco.numero = ler.nextLine(); 
+//        
+//        System.out.println("Entre com a bairro: ");
+//        this.endereco.bairro = ler.nextLine();        
+//        
+//        System.out.println("Entre com a cidade: ");
+//        this.endereco.cidade = ler.nextLine();        
+//        
+//        System.out.println("Entre com a caixa postal: ");
+//        this.endereco.caixaPostal = ler.nextLine();        
+//        
+//        System.out.println("Entre com a ilha: ");
+//        this.endereco.ilha = ler.nextLine();
         
-        System.out.println("Entre com o numero: ");
-        this.endereco.numero = ler.nextLine(); 
+        System.out.println("Entre com o salario");
+        this.salario = ler.nextFloat();
         
-        System.out.println("Entre com a bairro: ");
-        this.endereco.bairro = ler.nextLine();        
+        System.out.println("Entre com a comissão");
+        this.comissao = ler.nextFloat();
         
-        System.out.println("Entre com a cidade: ");
-        this.endereco.cidade = ler.nextLine();        
+        this.estado = true;
         
-        System.out.println("Entre com a caixa postal: ");
-        this.endereco.caixaPostal = ler.nextLine();        
+        System.out.println("Registar o nome do utilizador");
+        this.nomeUtilizador = ler.nextLine();
         
-        System.out.println("Entre com a ilha: ");
-        this.endereco.ilha = ler.nextLine();
-        
-        
+        System.out.println("Entre com palavra passe (6-12 caracteres)");
+        this.senha = ler.nextLine();
         
     }
 }

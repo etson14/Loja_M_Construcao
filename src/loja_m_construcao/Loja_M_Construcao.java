@@ -5,13 +5,15 @@
  */
 package loja_m_construcao;
 
+import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import loja_m_construcao.domain.Funcionario;
 public class Loja_M_Construcao {
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int cod,opc,pp;
         
         Scanner ler =new Scanner(System.in);
@@ -87,8 +89,10 @@ public class Loja_M_Construcao {
         break;}
         
         case 4:{
-            
-        break; }
+            Funcionario f = new Funcionario();
+            f.menu();
+            break; 
+        }
         
         case 5:{
             
