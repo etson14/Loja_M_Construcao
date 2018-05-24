@@ -34,8 +34,12 @@ public class Funcionario extends Pessoa {
     public int serieCarteira;
     
     public int op, ano, mes, dia;  
-    File funcionarioFile = new File("C:\\Users\\Jair\\Documents\\NetBeansProjects\\LMC\\Loja_M_Construcao\\src\\loja_m_construcao\\files\\funcionario.txt");
+    String funcionarioFile;
     Scanner ler = new Scanner(System.in);
+
+    public Funcionario() throws IOException {
+        this.funcionarioFile = new File("src\\loja_m_construcao\\files\\funcionario.txt").getCanonicalPath();
+    }
 
 
     public void menu() throws IOException{
