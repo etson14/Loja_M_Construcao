@@ -19,6 +19,7 @@ public class Loja_M_Construcao {
 
     
     public static void main(String[] args) throws IOException {
+         
         int cod,pp;
         JFrame frame =new JFrame("ok");
 
@@ -50,13 +51,14 @@ public class Loja_M_Construcao {
             if(func.nomeUtilizador.equals(nomeUsuario) && func.senha.equals(senha)){
                 menuPrincipal();
             }
-        }
-        
+        }  
         System.err.println("Erro no login \nTenta novamente!!!");
-        login();
+        //login(); 
+        
+        
     }
     public static void menuPrincipal() throws IOException{
-        int opc;
+        String opc;
         System.out.println("\n\n");
         System.out.println("*******************************************************");
         System.out.println("*******************************************************");
@@ -82,49 +84,50 @@ public class Loja_M_Construcao {
         System.out.println("*******************************************************");
 
         System.out.println("Escolha uma Opcao:");
-        opc=ler.nextInt();
+        opc=ler.nextLine();
 
         switch(opc){
 
-            case 1:{
+            case "1":{
                 Cliente c = new Cliente();
                 c.menu();
                 break;
             }
 
-            case 2:{
+            case "2":{
                 break;
             }
 
-            case 3:{
+            case "3":{
                 break;
             }
 
-            case 4:{
+            case "4":{
                 Funcionario f = new Funcionario();
                 f.menu();
                 break; 
             }
 
-            case 5:{
+            case "5":{
                 break;
             }
-            case 6:{
+            case "6":{
                 break;
             }
 
-            case 7:{
+            case "7":{
                 break;               
             }
-            case 8:{
+            case "8":{
                 break;    
             }
-            case 0:{
+            case "0":{
                 System.exit(0);
                 break;
             }
             default:{ 
                 System.out.println("Opcão Incorreta");
+                menuPrincipal();
             }
         }
    
