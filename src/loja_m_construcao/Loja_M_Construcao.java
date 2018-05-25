@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import loja_m_construcao.domain.Funcionario;
 import loja_m_construcao.domain.Cliente;
+import loja_m_construcao.domain.Fornecedor;
 
 public class Loja_M_Construcao {
 
@@ -97,6 +98,9 @@ public class Loja_M_Construcao {
             }
 
             case 3:{
+                Fornecedor c3=new Fornecedor();
+                c3.menuFornecedor();
+                        
                 break;
             }
 
