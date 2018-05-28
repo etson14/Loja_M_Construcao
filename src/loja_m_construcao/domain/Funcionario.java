@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.UnaryOperator;
 import javax.swing.JOptionPane;
 import static loja_m_construcao.Loja_M_Construcao.menuPrincipal;
 
@@ -26,7 +27,7 @@ import static loja_m_construcao.Loja_M_Construcao.menuPrincipal;
  */
 public class Funcionario extends Pessoa {       
    
-    public int idFuncionario;
+    public String idFuncionario;
     public float salario;
     public float comissao;
     public boolean estado;
@@ -49,12 +50,10 @@ public class Funcionario extends Pessoa {
         System.out.println("\t Menu Funcionarios");
         System.out.println("1 -> Listar Funcionarios");
         System.out.println("2 -> Adicionar Funcionarios");
-        System.out.println("3 -> Editar Funcionarios");
-        System.out.println("4 -> Eliminar Funcionarios");
-        System.out.println("5 -> Pesquisar Funcionarios");
+        System.out.println("3 -> Pesquisar Funcionarios");
         System.out.println("0 -> Voltar");
         
-        System.out.println("Escolha uma opção: ");
+        System.out.print("Escolha uma opção: ");
         op = ler.nextLine(); 
         
         switch(op){
@@ -64,26 +63,20 @@ public class Funcionario extends Pessoa {
             }
             case "2": {
                 adicionar();
+                subMuneAdicionar();
                 break;
             }
             case "3": {
-                
+                pesquisar();
+                subMenuEditarRemover();
                 break;
-            }
-            case "4": {
-                
-                break;
-            }
-            case "5": {
-                
-                break;
-            }
+            }            
             case "0":{
                 menuPrincipal();
                 break;
             }
             default:{
-                System.out.println("Erro!!!");
+                System.out.println("Escolha uma opção Valida!!!");
                 menu();
             }
         }
@@ -92,58 +85,54 @@ public class Funcionario extends Pessoa {
     
     public void listar() throws IOException{
         List<Funcionario> funcionarios = lerFicheiro();
-        System.out.println("Nome Completo   |Data Nascimento  |NIF        |BI        |Naturalidade   "
+        System.out.println("Codigo |Nome Completo   |Data Nascimento  |NIF        |BI        |Naturalidade   "
                  + "|Email           |Telefone    |Nome pai     |Nome mãe   |Rua      |Numero      |Bairro    |Cidade    "
                 + "|Caixa Postal   |Ilha      |Salario     |Comissão   |Estado    |Nome Utilizador   |Senha");
-        funcionarios.forEach(u -> System.out.println( u.nome 
+        funcionarios.forEach(u -> System.out.println( u.idFuncionario +"       "+u.nome 
                 +"     "+ u.dataNascimento +"       "+ u.NIF +"      "+ u.BI +"         "+ u.Naturalidade 
                 +"          "+ u.Email +"     "+ u.Telefone +"         "+ u.nomePai +"               "+ u.nomeMae 
                 +"      "+ u.endereco.rua +"     "+ u.endereco.numero +"     "+ u.endereco.bairro +"      "+ u.endereco.cidade 
                 +"      "+ u.endereco.caixaPostal +"    "+ u.endereco.ilha +"       "+ u.salario +"      "+ u.comissao
                 +"     "+ u.estado  +"      "+ u.nomeUtilizador  +"            "+ u.senha  
         ));
-        
-        System.out.println("\n\n1 - Voltar");
-        System.out.println("2 - Editar um funcionario");
-        System.out.println("3 - Eliminar um funcionario");
+                
+        System.out.println("\n\n1 -> Editar um funcionario");
+        System.out.println("2 -> Eliminar um funcionario");
+        System.out.println("0 -> Voltar");
+        System.out.print("\nEscolha uma opção: ");
         String op1;
         op1 = ler.nextLine();
         switch(op1){
             case "1":{
-                menu();
+                editar();
+                subMenuEditarRemover();
                 break;
             }
             case "2":{
+                eliminar();
+                subMenuEditarRemover();
+                break;
+            }
+            case "0":{
+                menu();
                 break;
             }
             default:{
                 System.out.println("Escolha uma opção valida");
+                listar();
             }
         }
-    }
-    
-    public List<Funcionario> eliminar() throws IOException{
-        List<Funcionario> funcionarios = lerFicheiro();
-        String elimina;
-        System.out.println("Escolha um BI");
-        elimina = ler.nextLine();
-        
-        for(Funcionario f : funcionarios){
-            if(f.BI.equals(elimina)){
-                funcionarios.remove(f);
-            }else{
-                System.out.println("BI funcionario não encontrado");
-            }
-        }
-        return funcionarios;        
-    }
+    }   
     
     public Funcionario adicionar() throws IOException{
+        List<Funcionario> funcionarioList = lerFicheiro();
         Funcionario funcionario = new Funcionario();
-        Endereco endereco = new Endereco();
+        Endereco endereco1 = new Endereco();
         
         System.out.println("\t Adicionar Funcionario");
-                
+          
+        System.out.println("Entre com o codigo");
+        funcionario.idFuncionario = ler.nextLine();
 
         System.out.println("Entre com o nome completo");
         funcionario.nome = ler.nextLine();
@@ -163,19 +152,18 @@ public class Funcionario extends Pessoa {
         System.out.println("Entre com o NIF");
         funcionario.NIF = ler.nextLine();
         while(!funcionario.NIF.matches("[0-9]{9}")){
-            JOptionPane.showMessageDialog(null,"erro");
+            //JOptionPane.showMessageDialog(null,"erro");
             System.out.println("Entre com o NIF novamente");
             funcionario.NIF = ler.nextLine();
         }
         
         System.out.println("Entre com o BI");
-        funcionario.BI = ler.nextLine();
-        if(!funcionario.BI.matches("[0-9]{9}")){
-            //while(!funcionario.BI.matches("[0-9]{9}")){
-                System.out.println("Entre com o NIF novamente");
-                funcionario.BI = ler.nextLine();
-            //}
+        funcionario.BI = ler.nextLine();        
+        while(!funcionario.BI.matches("[0-9]{6}")){
+            System.out.println("Entre com o BIF novamente");
+            funcionario.BI = ler.nextLine();
         }
+        
         
         System.out.println("Entre com a naturalidade");
         funcionario.Naturalidade = ler.nextLine();
@@ -193,23 +181,23 @@ public class Funcionario extends Pessoa {
         funcionario.nomeMae = ler.nextLine();
         
         System.out.println("Entre com a rua: ");
-        endereco.rua = ler.nextLine();        
+        endereco1.rua = ler.nextLine();        
         
         System.out.println("Entre com o numero: ");
-        endereco.numero = ler.nextLine(); 
+        endereco1.numero = ler.nextLine(); 
         
         System.out.println("Entre com a bairro: ");
-        endereco.bairro = ler.nextLine();        
+        endereco1.bairro = ler.nextLine();        
         
         System.out.println("Entre com a cidade: ");
-        endereco.cidade = ler.nextLine();        
+        endereco1.cidade = ler.nextLine();        
         
         System.out.println("Entre com a caixa postal: ");
-        endereco.caixaPostal = ler.nextLine();        
+        endereco1.caixaPostal = ler.nextLine();        
         
         System.out.println("Entre com a ilha: ");
-        endereco.ilha = ler.nextLine();
-        funcionario.endereco = endereco;
+        endereco1.ilha = ler.nextLine();
+        funcionario.endereco = endereco1;
         
         System.out.println("Entre com o salario");
         funcionario.salario = ler.nextFloat();
@@ -231,27 +219,106 @@ public class Funcionario extends Pessoa {
         
         funcionario.estado = true;
         
-        salvarFicheiro(funcionario);
+        funcionarioList.add(funcionario);
+        salvarFicheiros(funcionarioList);
+        
+        return funcionario;
+    }
+    
+    
+    public void editar() throws IOException{
+        List<Funcionario> funcionarios = lerFicheiro();
+        
+        String edita;
+        System.out.print("Escolha o codigo do funcionario que quer editar: ");
+        edita = ler.nextLine();
+        
+        for(Funcionario f : funcionarios){
+            if(f.idFuncionario.equals(edita)){
+                funcionarios.remove(f);
+            }
+        }        
+        
+        Funcionario funEditado = adicionar();
+        System.out.println("Editado com sucesso");
+        funcionarios.add(funEditado);
+        salvarFicheiros(funcionarios);
+    }
+    
+     public void eliminar() throws IOException{
+        List<Funcionario> funcionarios = lerFicheiro();
+        String elimina;
+        System.out.print("Escolha o codigo do funcionario: ");
+        elimina = ler.nextLine();
+        
+        for(Funcionario f : funcionarios){
+            if(f.idFuncionario.equals(elimina)){
+                funcionarios.remove(f);
+                System.out.println("Eliminado com sucesso");
+            }
+        }
+       // funcionarios.forEach(u -> System.out.println(u.nome));
+        salvarFicheiros(funcionarios);
+                
+    }
+     
+    public void pesquisar() throws IOException{
+        List<Funcionario> funcionarios = lerFicheiro();
+        String nomePesquisa;
+        System.out.println("Escolha um nome");
+        nomePesquisa = ler.nextLine();
+        
+        for(Funcionario f : funcionarios){
+            if(f.nome.contains(nomePesquisa)){
+                System.out.println(f.idFuncionario + " " +f.nome +"  "+ f.nomeUtilizador);
+            }
+        }      
 
-        System.out.println("\n\n1 - Voltar");
-        System.out.println("2 - Adicionar um funcionario");
+    }
+     
+    public void subMuneAdicionar() throws IOException{
+        System.out.println("\n\n1 -> Adicionar um novo funcionario");
+        System.out.println("0 -> Voltar");
+        System.out.print("\nEscolha uma opção: ");
         String op1;
         op1 = ler.nextLine();
         switch(op1){
-            case "1":{
+            case "0":{
                 menu();
                 break;
             }
-            case "2":{
+            case "1":{
                 adicionar();
                 break;
             }
             default:{
                 System.out.println("Escolha uma opção valida");
+                menu();
+            }
+        }
+    }
+    
+    public void subMenuEditarRemover() throws IOException{
+        System.out.println("\n\n1 -> Listar");
+        System.out.println("0 -> Voltar");
+        System.out.print("\nEscolha uma opção: ");
+        String op1;
+        op1 = ler.nextLine();
+        switch(op1){
+            case "0":{
+                menu();
+                break;
+            }
+            case "1":{
+                listar();
+                break;
+            }
+            default:{
+                System.out.println("Escolha uma opção valida");
+                menu();
             }
         }
         
-        return funcionario;
     }
     
     public List<Funcionario> lerFicheiro() throws FileNotFoundException, IOException{
@@ -293,6 +360,7 @@ public class Funcionario extends Pessoa {
            funcionario.estado = Boolean.parseBoolean(atributos[17]);
            funcionario.nomeUtilizador = atributos[18];  
            funcionario.senha = atributos[19];
+           funcionario.idFuncionario = atributos[20];
            
            funcionario.endereco = endereco1;
            
@@ -300,34 +368,36 @@ public class Funcionario extends Pessoa {
         }
 
         return funcionarioList;
-    }
-
+    }    
     
-    public void salvarFicheiro(Funcionario funcionario) throws IOException{
-        FileWriter funFileWriter = new FileWriter(funcionarioFile, true);
+    public void salvarFicheiros(List<Funcionario> funcionario) throws IOException{
+        FileWriter funFileWriter = new FileWriter(funcionarioFile);
         BufferedWriter funBuffWriter = new BufferedWriter(funFileWriter);
         
-        funBuffWriter.write(funcionario.nome + ";");
-        funBuffWriter.write(funcionario.dataNascimento + ";");
-        funBuffWriter.write(funcionario.NIF + ";");
-        funBuffWriter.write(funcionario.BI + ";");
-        funBuffWriter.write(funcionario.Naturalidade + ";");         
-        funBuffWriter.write(funcionario.Email + ";");         
-        funBuffWriter.write(funcionario.Telefone + ";");
-        funBuffWriter.write(funcionario.nomePai + ";");
-        funBuffWriter.write(funcionario.nomeMae + ";");
-        funBuffWriter.write(funcionario.endereco.rua + ";");
-        funBuffWriter.write(funcionario.endereco.numero + ";");
-        funBuffWriter.write(funcionario.endereco.bairro + ";");
-        funBuffWriter.write(funcionario.endereco.cidade + ";");
-        funBuffWriter.write(funcionario.endereco.caixaPostal + ";");
-        funBuffWriter.write(funcionario.endereco.ilha + ";");
-        funBuffWriter.write(funcionario.salario + ";");
-        funBuffWriter.write(funcionario.comissao + ";");
-        funBuffWriter.write(funcionario.estado + ";");
-        funBuffWriter.write(funcionario.nomeUtilizador + ";");
-        funBuffWriter.write(funcionario.senha + "\n");
-        
+        for(Funcionario f : funcionario){
+            funBuffWriter.write(f.nome + ";");
+            funBuffWriter.write(f.dataNascimento + ";");
+            funBuffWriter.write(f.NIF + ";");
+            funBuffWriter.write(f.BI + ";");
+            funBuffWriter.write(f.Naturalidade + ";");         
+            funBuffWriter.write(f.Email + ";");         
+            funBuffWriter.write(f.Telefone + ";");
+            funBuffWriter.write(f.nomePai + ";");
+            funBuffWriter.write(f.nomeMae + ";");
+            funBuffWriter.write(f.endereco.rua + ";");
+            funBuffWriter.write(f.endereco.numero + ";");
+            funBuffWriter.write(f.endereco.bairro + ";");
+            funBuffWriter.write(f.endereco.cidade + ";");
+            funBuffWriter.write(f.endereco.caixaPostal + ";");
+            funBuffWriter.write(f.endereco.ilha + ";");
+            funBuffWriter.write(f.salario + ";");
+            funBuffWriter.write(f.comissao + ";");
+            funBuffWriter.write(f.estado + ";");
+            funBuffWriter.write(f.nomeUtilizador + ";");
+            funBuffWriter.write(f.senha + ";");
+            funBuffWriter.write(f.idFuncionario + "\n");
+        }
         funBuffWriter.close();
     }
+     
 }

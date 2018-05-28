@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import loja_m_construcao.domain.Funcionario;
 import loja_m_construcao.domain.Cliente;
+import loja_m_construcao.domain.Fornecedor;
 
 public class Loja_M_Construcao {
 
@@ -19,20 +19,22 @@ public class Loja_M_Construcao {
 
     
     public static void main(String[] args) throws IOException {
-         
+         Funcionario f = new Funcionario();
+                f.menu();
+                
         int cod,pp;
         JFrame frame =new JFrame("ok");
 
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
-        System.out.println("**                                                   **");
-        System.out.println("**         LOJA DE MATERIAL DE CONSTRUÇÃO            **");
-        System.out.println("**                                                   **");
-        System.out.println("*******************************************************");
-        System.out.println("*******************************************************");
-
-        
-        login();
+//        System.out.println("*******************************************************");
+//        System.out.println("*******************************************************");
+//        System.out.println("**                                                   **");
+//        System.out.println("**         LOJA DE MATERIAL DE CONSTRUÇÃO            **");
+//        System.out.println("**                                                   **");
+//        System.out.println("*******************************************************");
+//        System.out.println("*******************************************************");
+//
+//        
+//        login();
         
     }
     
@@ -69,14 +71,11 @@ public class Loja_M_Construcao {
         System.out.println("*******************************************************");
         System.out.println("**                                                   **");
         System.out.println("**                                                   **");
-        System.out.println("**               1->Cliente                          **");
-        System.out.println("**               2->Endereço                         **");
-        System.out.println("**               3->Fornecedor                       **");
-        System.out.println("**               4->Funcionario                      **");
-        System.out.println("**               5->Material                         **");
-        System.out.println("**               6->Pedido                           **");
-        System.out.println("**               7->Pessoa                           **");
-        System.out.println("**               8->Venda                            **");
+        System.out.println("**               1->Clientes                         **");
+        System.out.println("**               2->Fornecedor                       **");
+        System.out.println("**               3->Funcionarios                     **");
+        System.out.println("**               4->Materias                         **");
+        System.out.println("**               5->Venda                            **");
         System.out.println("**                                                   **");
         System.out.println("**               0-SAIR                              **");
         System.out.println("**                                                   **");
@@ -95,32 +94,25 @@ public class Loja_M_Construcao {
             }
 
             case "2":{
+                Fornecedor c3=new Fornecedor();
+                c3.menuFornecedor(); 
                 break;
             }
 
             case "3":{
+                Funcionario f = new Funcionario();
+                f.menu();                      
                 break;
             }
 
             case "4":{
-                Funcionario f = new Funcionario();
-                f.menu();
+                
                 break; 
             }
 
             case "5":{
                 break;
-            }
-            case "6":{
-                break;
-            }
-
-            case "7":{
-                break;               
-            }
-            case "8":{
-                break;    
-            }
+            }            
             case "0":{
                 System.exit(0);
                 break;

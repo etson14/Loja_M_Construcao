@@ -18,5 +18,6 @@ public class Material {
     public LocalDate dataFabricacao;
     public String unidadeMedida;
     public float preco;
+    public int quanridade;
     
 }
