@@ -6,12 +6,15 @@
 package loja_m_construcao;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import loja_m_construcao.domain.Funcionario;
 import loja_m_construcao.domain.Cliente;
 import loja_m_construcao.domain.Fornecedor;
+import loja_m_construcao.domain.Material;
+import loja_m_construcao.domain.Venda;
 
 public class Loja_M_Construcao {
 
@@ -19,23 +22,25 @@ public class Loja_M_Construcao {
 
     
     public static void main(String[] args) throws IOException {
-         Funcionario f = new Funcionario();
-                f.menu();
-                
-        int cod,pp;
+         //menuPrincipal();
+        
+        LocalDateTime dataSistema = LocalDateTime.now();
         JFrame frame =new JFrame("ok");
 
-//        System.out.println("*******************************************************");
-//        System.out.println("*******************************************************");
-//        System.out.println("**                                                   **");
-//        System.out.println("**         LOJA DE MATERIAL DE CONSTRUÇÃO            **");
-//        System.out.println("**                                                   **");
-//        System.out.println("*******************************************************");
-//        System.out.println("*******************************************************");
-//
-//        
-//        login();
-        
+       System.out.println("*******************************************************");
+        System.out.println("*******************************************************");
+        System.out.println("**                                                   **");
+        System.out.println("**         LOJA DE MATERIAL DE CONSTRUÇÃO            **");
+        System.out.println("**                                                   **");
+        System.out.println("*******************************************************");
+        System.out.println("*******************************************************");
+
+        if(dataSistema.getDayOfWeek().toString().equals("SUNDAY") || dataSistema.getDayOfWeek().toString().equals("SATURDAY")){
+            System.err.println("Fim de semana");
+            System.err.println("Não há sistema\n");
+        }else{
+            login();
+        }
     }
     
     public static void login() throws IOException{
@@ -106,11 +111,14 @@ public class Loja_M_Construcao {
             }
 
             case "4":{
-                
+                Material m = new Material();
+                m.menu();
                 break; 
             }
 
             case "5":{
+                Venda v = new Venda();
+                v.menu();
                 break;
             }            
             case "0":{

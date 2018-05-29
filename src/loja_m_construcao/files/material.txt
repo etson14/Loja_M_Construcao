@@ -1,1 +1,5 @@
-
+12;bloco;200.0;49;nepa
+13;cimento;200.0;50;cvc
+11;massa baracao;200.0;29;sita
+14;tinta 2l;200.0;42;sita
+16;ferro;900.0;23;velho
