@@ -14,15 +14,17 @@ import loja_m_construcao.domain.Funcionario;
 import loja_m_construcao.domain.Cliente;
 import loja_m_construcao.domain.Fornecedor;
 import loja_m_construcao.domain.Material;
+import loja_m_construcao.domain.Utilizador;
 import loja_m_construcao.domain.Venda;
 
 public class Loja_M_Construcao {
 
     public static Scanner ler = new Scanner(System.in);
-
+    public static String nomeUsuario;
     
     public static void main(String[] args) throws IOException {
-         //menuPrincipal();
+//         Utilizador utilizador = new Utilizador();
+//        utilizador.menu();
         
         LocalDateTime dataSistema = LocalDateTime.now();
         JFrame frame =new JFrame("ok");
@@ -45,24 +47,24 @@ public class Loja_M_Construcao {
     
     public static void login() throws IOException{
         
-        String nomeUsuario, senha;
+        String  senha;
         System.out.println("\n\nEntre com nome do usuario: ");
         nomeUsuario = ler.nextLine();
         System.out.println("Entre com a senha: ");
         senha = ler.nextLine();
         
-        Funcionario f = new Funcionario();
-        List<Funcionario> funcionarios = f.lerFicheiro();
+        Utilizador utilizador = new Utilizador();
+        List<Utilizador> utilizadorList = utilizador.lerFicheiro();
         
-        for(Funcionario func : funcionarios){
-            if(func.nomeUtilizador.equals(nomeUsuario) && func.senha.equals(senha)){
+        for(Utilizador u : utilizadorList){
+           if(u.nome.equals(nomeUsuario) && u.senha.equals(senha)){
                 menuPrincipal();
-            }
+           }
         }  
-        System.err.println("Erro no login \nTenta novamente!!!");
+        //System.err.println("Erro no login \nTenta novamente!!!");
         //login(); 
         
-        
+        //return nomeUsuario;
     }
     public static void menuPrincipal() throws IOException{
         String opc;
@@ -76,11 +78,12 @@ public class Loja_M_Construcao {
         System.out.println("*******************************************************");
         System.out.println("**                                                   **");
         System.out.println("**                                                   **");
-        System.out.println("**               1->Clientes                         **");
-        System.out.println("**               2->Fornecedor                       **");
-        System.out.println("**               3->Funcionarios                     **");
-        System.out.println("**               4->Materias                         **");
-        System.out.println("**               5->Venda                            **");
+        System.out.println("**               1 -> Clientes                       **");
+        System.out.println("**               2 -> Fornecedores                   **");
+        System.out.println("**               3 -> Funcionarios                   **");
+        System.out.println("**               4 -> Materias                       **");
+        System.out.println("**               5 -> Vendas                         **");
+        System.out.println("**               6 -> Utilizadores                   **");
         System.out.println("**                                                   **");
         System.out.println("**               0-SAIR                              **");
         System.out.println("**                                                   **");
@@ -120,7 +123,12 @@ public class Loja_M_Construcao {
                 Venda v = new Venda();
                 v.menu();
                 break;
-            }            
+            } 
+            case "6":{
+                Utilizador u = new Utilizador();
+                u.menu();
+                break;
+            } 
             case "0":{
                 System.exit(0);
                 break;

@@ -210,6 +210,7 @@ public class Material {
         switch(op1){
             case "1":{
                 editar();
+                listar();
                 break;
             }
             case "0":{
@@ -218,7 +219,7 @@ public class Material {
             }
             default:{
                 System.out.println("Escolha uma opção valida");
-                listar();
+                subMenuListar();
             }
         }
     }
@@ -231,6 +232,8 @@ public class Material {
         
         switch(op){
             case "1":{
+                addcionar();
+                subMenuAddMat();
                 break;
             }
             case "0":{

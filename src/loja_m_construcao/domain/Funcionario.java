@@ -31,8 +31,6 @@ public class Funcionario extends Pessoa {
     public float salario;
     public float comissao;
     public boolean estado;
-    public String nomeUtilizador;
-    public String senha;
     public int serieCarteira;
     
     public int  ano, mes, dia;
@@ -87,13 +85,13 @@ public class Funcionario extends Pessoa {
         List<Funcionario> funcionarios = lerFicheiro();
         System.out.println("Codigo |Nome Completo   |Data Nascimento  |NIF        |BI        |Naturalidade   "
                  + "|Email           |Telefone    |Nome pai     |Nome mãe   |Rua      |Numero      |Bairro    |Cidade    "
-                + "|Caixa Postal   |Ilha      |Salario     |Comissão   |Estado    |Nome Utilizador   |Senha");
+                + "|Caixa Postal   |Ilha      |Salario     |Comissão   |Estado    ");
         funcionarios.forEach(u -> System.out.println( u.idFuncionario +"       "+u.nome 
                 +"     "+ u.dataNascimento +"       "+ u.NIF +"      "+ u.BI +"         "+ u.Naturalidade 
                 +"          "+ u.Email +"     "+ u.Telefone +"         "+ u.nomePai +"               "+ u.nomeMae 
                 +"      "+ u.endereco.rua +"     "+ u.endereco.numero +"     "+ u.endereco.bairro +"      "+ u.endereco.cidade 
                 +"      "+ u.endereco.caixaPostal +"    "+ u.endereco.ilha +"       "+ u.salario +"      "+ u.comissao
-                +"     "+ u.estado  +"      "+ u.nomeUtilizador  +"            "+ u.senha  
+                +"     "+ u.estado  
         ));
                 
         System.out.println("\n\n1 -> Editar um funcionario");
@@ -205,18 +203,6 @@ public class Funcionario extends Pessoa {
         System.out.println("Entre com a comissão");
         funcionario.comissao = ler.nextFloat();
         
-        ler.nextLine();
-        System.out.println("Registar o nome do utilizador");
-        funcionario.nomeUtilizador = ler.nextLine(); 
-        
-        System.out.println("Entre com palavra passe (6-12 caracteres)");
-        funcionario.senha = ler.nextLine();
-        while(funcionario.senha.length() <= 6 || funcionario.senha.length() >= 12){
-            System.err.println("Senha invalida");
-            System.out.println("Entre com palavra passe novamente (6-12 caracteres)");
-            funcionario.senha = ler.nextLine();
-        }
-        
         funcionario.estado = true;
         
         funcionarioList.add(funcionario);
@@ -270,7 +256,7 @@ public class Funcionario extends Pessoa {
         
         for(Funcionario f : funcionarios){
             if(f.nome.contains(nomePesquisa)){
-                System.out.println(f.idFuncionario + " " +f.nome +"  "+ f.nomeUtilizador);
+                System.out.println(f.idFuncionario + " " +f.nome);
             }
         }      
 
@@ -358,9 +344,7 @@ public class Funcionario extends Pessoa {
            funcionario.salario = valueOf(atributos[15]);
            funcionario.comissao = valueOf(atributos[16]);
            funcionario.estado = Boolean.parseBoolean(atributos[17]);
-           funcionario.nomeUtilizador = atributos[18];  
-           funcionario.senha = atributos[19];
-           funcionario.idFuncionario = atributos[20];
+           funcionario.idFuncionario = atributos[18];
            
            funcionario.endereco = endereco1;
            
@@ -393,8 +377,6 @@ public class Funcionario extends Pessoa {
             funBuffWriter.write(f.salario + ";");
             funBuffWriter.write(f.comissao + ";");
             funBuffWriter.write(f.estado + ";");
-            funBuffWriter.write(f.nomeUtilizador + ";");
-            funBuffWriter.write(f.senha + ";");
             funBuffWriter.write(f.idFuncionario + "\n");
         }
         funBuffWriter.close();

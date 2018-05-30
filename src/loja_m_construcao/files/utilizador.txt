@@ -1,0 +1,4 @@
+10;gil;12345678;Vendedor
+18;kiara;1234rt;Vendedor
+12;jair;123456;Administrador
+15;james;123456;Vendedor
